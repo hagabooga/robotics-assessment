@@ -23,10 +23,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="task1.hpp">
+    <ClInclude Include="Args.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Args.hpp">
+    <ClInclude Include="Point.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InspectionGroup.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InspectionRegion.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

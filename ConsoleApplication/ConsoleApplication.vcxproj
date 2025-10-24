@@ -129,7 +129,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Args.hpp" />
-    <ClInclude Include="task1.hpp" />
+    <ClInclude Include="InspectionGroup.hpp" />
+    <ClInclude Include="InspectionRegion.hpp" />
+    <ClInclude Include="Point.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

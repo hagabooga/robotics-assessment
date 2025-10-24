@@ -3,7 +3,7 @@
 #include <iostream>
 #include <filesystem>
 
-DEFINE_string(data_directory, "", "path to folder containing the files");
+DEFINE_string(data_directory, "", "Path to folder containing the files");
 
 int parse_args(int argc, char* argv[], Args& args)
 {
