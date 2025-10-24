@@ -132,6 +132,7 @@ ALTER TABLE inspection_region ADD COLUMN IF NOT EXISTS category INTEGER;)");
 			{
 				txn.exec(R"(insert into inspection_group (id) 
                             values ($1) on conflict (id) do nothing;)", pqxx::params{ pgrp });
+				existing_groups.insert(pgrp);
 			}
 			txn.exec(R"(insert into inspection_region (id, group_id, coord_x, coord_y, category)
                         values ($1, $2, $3, $4, $5) on conflict (id) do nothing;)", pqxx::params{ i + 1, pgrp, p.first, p.second, pcat });
