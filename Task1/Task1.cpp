@@ -1,6 +1,3 @@
-// ConsoleApplication.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <filesystem>
 #include "Args.hpp"
@@ -13,7 +10,7 @@
 
 using namespace std::literals;
 
-static int task_1(int argc, char* argv[], Args& args)
+static int task_1(int argc, char *argv[], Args &args)
 {
 	// 1. Takes an argument --data_directory (path to folder containing the files).
 	const int parse_args_code = parse_args(argc, argv, args);
@@ -125,22 +122,24 @@ ALTER TABLE inspection_region ADD COLUMN IF NOT EXISTS category INTEGER;)");
 		std::unordered_set<long long> existing_groups;
 		for (size_t i = 0; i < read_points.size(); i++)
 		{
-			const auto& p = read_points[i];
+			const auto &p = read_points[i];
 			const int pcat = read_categories[i];
 			const long long pgrp = read_groups[i];
 			if (existing_groups.find(pgrp) == existing_groups.end())
 			{
 				txn.exec(R"(insert into inspection_group (id) 
-                            values ($1) on conflict (id) do nothing;)", pqxx::params{ pgrp });
+                            values ($1) on conflict (id) do nothing;)",
+						 pqxx::params{pgrp});
 				existing_groups.insert(pgrp);
 			}
 			txn.exec(R"(insert into inspection_region (id, group_id, coord_x, coord_y, category)
-                        values ($1, $2, $3, $4, $5) on conflict (id) do nothing;)", pqxx::params{ i + 1, pgrp, p.first, p.second, pcat });
+                        values ($1, $2, $3, $4, $5) on conflict (id) do nothing;)",
+					 pqxx::params{i + 1, pgrp, p.first, p.second, pcat});
 		}
 		txn.commit();
 		std::cout << "Database populated successfully." << std::endl;
 	}
-	catch (const std::exception& e)
+	catch (const std::exception &e)
 	{
 		std::cerr << "Database operation failed: " << e.what() << std::endl;
 		return 1;
@@ -148,8 +147,7 @@ ALTER TABLE inspection_region ADD COLUMN IF NOT EXISTS category INTEGER;)");
 	return 0;
 }
 
-
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 	Args args;
 	int task_1_code = task_1(argc, argv, args);
@@ -157,9 +155,5 @@ int main(int argc, char* argv[])
 	{
 		return task_1_code;
 	}
-
-
-
 	return 0;
 }
-

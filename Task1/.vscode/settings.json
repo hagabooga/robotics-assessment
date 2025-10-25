@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.geitejson": "json",
+        "*.rmd": "markdown",
+        "*.sensormetajson": "json",
+        "*.uss": "css",
+        "*.uxml": "xml",
+        "iostream": "cpp"
+    }
+}

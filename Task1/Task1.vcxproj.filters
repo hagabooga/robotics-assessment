@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConsoleApplication.cpp">
+    <ClCompile Include="Task1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Args.cpp">
@@ -24,15 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Args.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InspectionGroup.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InspectionRegion.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
