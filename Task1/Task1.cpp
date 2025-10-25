@@ -4,8 +4,6 @@
 #include <pqxx/pqxx>
 #include <fstream>
 #include <sstream>
-#include <pqxx/zview.hxx>
-#include <string_view>
 #include <unordered_set>
 
 using namespace std::literals;
@@ -94,7 +92,7 @@ static int task_1(int argc, char *argv[], Args &args)
 	}
 
 	// 3. Populates the PostgreSQL database using libpqxx.
-	pqxx::connection conn("host=localhost port=5432 dbname=postgres user=postgres password=asdasd");
+	pqxx::connection conn("host=localhost port=5432 dbname=RoboticsAssessment user=postgres password=asdasd");
 	if (!conn.is_open())
 	{
 		std::cerr << "Error: Unable to open database connection." << std::endl;
@@ -111,13 +109,16 @@ id BIGINT NOT NULL,
 PRIMARY KEY (id));
 
 CREATE TABLE IF NOT EXISTS inspection_region (
-    id BIGINT NOT NULL,
-    group_id BIGINT,
-    PRIMARY KEY (id));
+	id BIGINT NOT NULL,
+	group_id BIGINT,
+	PRIMARY KEY (id));
 
 ALTER TABLE inspection_region ADD COLUMN IF NOT EXISTS coord_x FLOAT;
 ALTER TABLE inspection_region ADD COLUMN IF NOT EXISTS coord_y FLOAT;
-ALTER TABLE inspection_region ADD COLUMN IF NOT EXISTS category INTEGER;)");
+ALTER TABLE inspection_region ADD COLUMN IF NOT EXISTS category INTEGER;
+
+ALTER TABLE inspection_region ADD COLUMN IF NOT EXISTS geom geometry(Point);
+CREATE INDEX IF NOT EXISTS idx_region_geom ON inspection_region USING GIST (geom);)");
 
 		std::unordered_set<long long> existing_groups;
 		for (size_t i = 0; i < read_points.size(); i++)
@@ -132,8 +133,8 @@ ALTER TABLE inspection_region ADD COLUMN IF NOT EXISTS category INTEGER;)");
 						 pqxx::params{pgrp});
 				existing_groups.insert(pgrp);
 			}
-			txn.exec(R"(insert into inspection_region (id, group_id, coord_x, coord_y, category)
-                        values ($1, $2, $3, $4, $5) on conflict (id) do nothing;)",
+			txn.exec(R"(insert into inspection_region (id, group_id, coord_x, coord_y, category, geom)
+                        values ($1, $2, $3, $4, $5, ST_MakePoint($3, $4)) on conflict (id) do nothing;)",
 					 pqxx::params{i + 1, pgrp, p.first, p.second, pcat});
 		}
 		txn.commit();

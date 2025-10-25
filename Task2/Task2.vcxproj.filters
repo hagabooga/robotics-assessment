@@ -22,9 +22,21 @@
     <ClCompile Include="Args.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="JsonQuery.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JsonQueryInspectionRegionSqlBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Args.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonQuery.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonQueryInspectionRegionSqlBuilder.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

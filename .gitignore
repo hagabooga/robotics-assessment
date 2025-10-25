@@ -470,3 +470,6 @@ FodyWeavers.xsd
 .vs/
 *.env
 
+
+!Task1.exe
+!Task2.exe
