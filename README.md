@@ -34,6 +34,13 @@ I've added a geometry column to the `inspection_region` table to store point dat
 
 **IDE**: Visual Studio is the IDE used for developing the C++ console applications. It is used to build and run the programs for data loading and querying.
 
+## Projects
+
+Both projects are developed in C++ using Visual Studio and managed with vcpkg for dependencies.
+
+- Task1
+- Task2
+
 ## Applications
 
 **Task1.exe**: Compiled C++ console program for data loading.
